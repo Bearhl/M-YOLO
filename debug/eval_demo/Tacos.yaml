@@ -1,0 +1,61 @@
+# train and val datasets
+GPUS: 0, 1, 2
+WORKERS: 16
+LOG_DIR: ./log
+TENSORBOARD_DIR: ./tensorboard
+MODEL_DIR: ./checkpoints
+RESULT_DIR: ./results
+VERBOSE: False
+TAG: ""
+
+
+DATASET:
+  NAME: Tacos
+  TRAIN: /nfsc/aies_core_id10061778_vol1001_dev/backup/xionghaoliang660/datasets/Moment_Retrieval/text_data/TACoS/train.json
+  VAL: /nfsc/aies_core_id10061778_vol1001_dev/backup/xionghaoliang660/datasets/Moment_Retrieval/text_data/TACoS/val.json
+  TEST: /nfsc/aies_core_id10061778_vol1001_dev/backup/xionghaoliang660/datasets/Moment_Retrieval/text_data/TACoS/test.json
+
+  ANNOTATION_PATH: /nfsc/aies_core_id10061778_vol1001_dev/backup/xionghaoliang660/datasets/Moment_Retrieval/TACoS_cache/Annotation
+
+  ANCHOR_PATH: /nfsc/aies_core_id10061778_vol1001_dev/backup/xionghaoliang660/datasets/Moment_Retrieval/Anchor/tacos.txt
+
+  VIDEO_CACHE: /nfsc/aies_core_id10061778_vol1001_dev/backup/xionghaoliang660/datasets/Moment_Retrieval/TACoS_cache/
+
+  BLOCK_SIZE: 50
+
+  NO_VAL: False
+
+LOSS:
+  NA: 5
+  ANCHOR_T: 4.0
+  ALPHA: 1
+  BETA: 5
+  SCALE: 0.1
+
+TRAIN:
+  LR: 0.001
+  WEIGHT_DECAY: 0
+  FACTOR: 0.8
+  PATIENCE: 20
+  MAX_EPOCH: 20
+  BATCH_SIZE: 4
+  STEP_ACCUMULATE: 1
+  SHUFFLE: True
+  CONTINUE: False
+  FP16: False
+  FINE_TUNE: False
+
+TEST:
+  BATCH_SIZE: 8
+  RECALL: 1,5
+  TIOU: 0.1,0.3,0.5,0.7
+  NMS_THRESH: 0.5
+
+MODEL:
+  NAME: M-YOLO
+  TEXT_ATTN_LAYER: 3
+  CRO_ATTN_LAYER: 2
+
+CUDNN:
+  DETERMINISTIC: False
+  BENCHMARK: True
